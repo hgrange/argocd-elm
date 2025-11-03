@@ -1,5 +1,9 @@
-namespace: rse
-rse_channel: "1.4"
-rse_csv: rhapsody-se-operator.v1.4.1
-postgres_channel: v5
-postgres_csv: postgresoperator.v5.8.4
+global:
+  namespace: rse
+rse:
+  channel: "1.4"
+  csv: rhapsody-se-operator.v1.4.1
+postgres:
+  channel: v5
+  csv: postgresoperator.v5.8.4
+  image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi9-17.6-2534
