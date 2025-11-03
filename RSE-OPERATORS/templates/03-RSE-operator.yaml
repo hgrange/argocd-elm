@@ -35,7 +35,6 @@ metadata:
 roleRef:
   kind: Role
   name: ibm-rse-createsecret
-  namespace: {{ .Values.global.namespace }}
 subjects:
 - kind: ServiceAccount
   name: ibm-rse-createsecret
