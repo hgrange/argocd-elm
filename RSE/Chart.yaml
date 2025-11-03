@@ -1,0 +1,4 @@
+apiVersion: v2
+name: ibm-rse
+description: A Helm chart to install IBM Rhapsody
+version: 0.1.0
