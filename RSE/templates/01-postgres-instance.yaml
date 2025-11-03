@@ -4,7 +4,7 @@ metadata:
   name: sysml
   namespace: {{ .Values.global.namespace }}
 spec:
-  image: {{ .Values.rse.image }}
+  image: {{ .Values.postgres.image }}
   backups:
     pgbackrest:
       repos:
