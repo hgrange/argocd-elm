@@ -2,15 +2,15 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: 00-namespace
-  namespace: {{ namespace }}
+  namespace: {{ .Values.global.namespace }}
 spec:
   template:
     spec:
-      serviceAccountName: {{ serviceaccount }}
-      serviceAccount: {{ serviceaccount }}
+      serviceAccountName: {{ .Values.oc.serviceaccount }}
+      serviceAccount: {{ .Values.oc.serviceaccount }}
       containers:
         - name: oc
-          image: {{ .Values.global.image }}
+          image: {{ .Values.oc.image }}
           command:
             - /bin/sh
             - -c
