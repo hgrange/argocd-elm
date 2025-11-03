@@ -36,7 +36,6 @@ roleRef:
   kind: Role
   name: ibm-rse-createsecret
   namespace: {{ .Values.global.namespace }}
-  apiGroup: rbac.authorization.k8s.io
 subjects:
 - kind: ServiceAccount
   name: ibm-rse-createsecret
