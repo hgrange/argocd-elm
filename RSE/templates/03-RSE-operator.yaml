@@ -1,6 +1,6 @@
 kind: Subscription
 metadata:
-  name: rhapsody-se-operator
+  name: rse-operator
   namespace: {{ global.namespace }}
 spec:
   channel: {{ rse.channel }}
