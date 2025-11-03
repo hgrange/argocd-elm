@@ -10,3 +10,35 @@ spec:
   source: ibm-rse
   sourceNamespace: {{ .Values.global.namespace }}
   startingCSV:  {{ .Values.rse.csv }}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ibm-rse-createsecret
+  namespace: {{ .Values.global.namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: ibm-rse-createsecret
+  namespace: {{ .Values.global.namespace }}
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "list","create","delete","patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: ibm-rse-createsecret
+  namespace: {{ .Values.global.namespace }}
+roleRef:
+  kind: Role
+  name: ibm-rse-createsecret
+  namespace: {{ .Values.global.namespace }}
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: ServiceAccount
+  name: ibm-rse-createsecret
+  namespace: {{ .Values.global.namespace }}
+
