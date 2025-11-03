@@ -1,1 +1,11 @@
-
+kind: Subscription
+metadata:
+  name: rhapsody-se-operator
+  namespace: {{ namespace }}
+spec:
+  channel: {{ rse_channel }}
+  installPlanApproval: Automatic
+  name: rhapsody-se-operator
+  source: ibm-rse
+  sourceNamespace: {{ namespace }}
+  startingCSV:  {{ rse_csv }}
