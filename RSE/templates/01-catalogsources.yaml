@@ -2,7 +2,7 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: CatalogSource
 metadata:
   name: ibm-rse
-  namespace: {{ global.namespace }}
+  namespace: {{ .Values.global.namespace }}
 spec:
   displayName: RSE Catalog Source Marketplace
   image: 'icr.io/cpopen/ibm-rse-operator-catalog:latest'
@@ -16,7 +16,7 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: CatalogSource
 metadata:
   name: ibm-operators
-  namespace: {{ global.namespace }}
+  namespace: {{ .Values.global.namespace }}
 spec:
   displayName: IBM Catalog Source Marketplace
   image: 'icr.io/cpopen/ibm-operator-catalog:latest'
