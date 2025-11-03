@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: 00-namespace
+  namespace: {{ namespace }}
+spec:
+  template:
+    spec:
+      serviceAccountName: {{ serviceaccount }}
+      serviceAccount: {{ serviceaccount }}
+      containers:
+        - name: oc
+          image: {{ .Values.global.image }}
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -xv
+              oc new-project {{ namespace }}
+            
+      restartPolicy: Never
