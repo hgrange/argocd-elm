@@ -16,6 +16,6 @@ spec:
             - -c
             - |
               set -xv
-              oc new-project {{ namespace }}
+              oc new-project {{ .Values.global.namespace }}
             
       restartPolicy: Never
