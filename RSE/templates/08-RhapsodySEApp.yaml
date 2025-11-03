@@ -2,7 +2,7 @@ apiVersion: rhapsodyse.ibm.com/v1
 kind: RhapsodySEApp
 metadata:
   name: rhapsodyseapp
-  namespace: {{ global.namespace }}
+  namespace: {{ .Values.global.namespace }}
 spec:
   ## Accept IBM Rhapsody SE license by setting the value as true.
   acceptLicense: true
