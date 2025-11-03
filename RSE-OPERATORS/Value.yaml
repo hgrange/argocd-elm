@@ -1,7 +1,7 @@
 global:
   namespace: rse
 rse:
-  channel: "1.4"
+  channel: '"1.4"'
   csv: rhapsody-se-operator.v1.4.1
 postgres:
   channel: v5
