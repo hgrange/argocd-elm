@@ -2,9 +2,9 @@ apiVersion: postgres-operator.crunchydata.com/v1beta1
 kind: PostgresCluster
 metadata:
   name: sysml
-  namespace: {{ global.namespace }}
+  namespace: {{ .Values.global.namespace }}
 spec:
-  image: {{ rse.image }}
+  image: {{ .Values.rse.image }}
   backups:
     pgbackrest:
       repos:
