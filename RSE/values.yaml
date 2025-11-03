@@ -2,7 +2,7 @@ global:
   namespace: rse
 oc:
   image: quay.io/openshift/origin-cli:latest
-  serviceaccount: rse-installer
+  serviceaccount: ibm-rse-createsecret
 postgres:
   image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi9-17.6-2534
 ibm:
