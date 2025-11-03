@@ -4,11 +4,11 @@ metadata:
   labels:
     operators.coreos.com/postgresql.openshift-operators: ''
   name: postgresql
-  namespace: {{ namespace }}
+  namespace: {{ global.namespace }}
 spec:
-  channel: {{ postgres_channel }}
+  channel: {{ postgres.channel }}
   installPlanApproval: Automatic
   name: postgresql
   source: community-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: {{ postgres_csv }}
+  startingCSV: {{ postgres.csv }}
