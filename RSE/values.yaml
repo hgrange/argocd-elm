@@ -3,12 +3,7 @@ global:
 oc:
   image: quay.io/openshift/origin-cli:latest
   serviceaccount: rse-installer
-rse:
-  channel: "1.4"
-  csv: rhapsody-se-operator.v1.4.1
 postgres:
-  channel: v5
-  csv: postgresoperator.v5.8.4
   image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi9-17.6-2534
 ibm:
   entitlement: eHh4eHh4eHh4eHh4eHh4Cg==
