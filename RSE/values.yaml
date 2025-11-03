@@ -7,3 +7,5 @@ postgres:
   channel: v5
   csv: postgresoperator.v5.8.4
   image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi9-17.6-2534
+ibm:
+  entitlement: eHh4eHh4eHh4eHh4eHh4Cg==
