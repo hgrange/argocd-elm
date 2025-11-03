@@ -11,17 +11,3 @@ spec:
   updateStrategy:
     registryPoll:
       interval: 45m
----
-apiVersion: operators.coreos.com/v1alpha1
-kind: CatalogSource
-metadata:
-  name: ibm-operators
-  namespace: {{ .Values.global.namespace }}
-spec:
-  displayName: IBM Catalog Source Marketplace
-  image: 'icr.io/cpopen/ibm-operator-catalog:latest'
-  publisher: IBM
-  sourceType: grpc
-  updateStrategy:
-    registryPoll:
-      interval: 45m
