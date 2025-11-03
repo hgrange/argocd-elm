@@ -1,5 +1,8 @@
 global:
   namespace: rse
+oc:
+  image: quay.io/openshift/origin-cli:latest
+  serviceaccount: rse-installer
 rse:
   channel: "1.4"
   csv: rhapsody-se-operator.v1.4.1
