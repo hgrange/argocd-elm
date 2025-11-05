@@ -1,0 +1,90 @@
+apiVersion: rhapsodyse.ibm.com/v1
+kind: RhapsodySEApp
+metadata:
+  name: rhapsodyseapp  ## Defines the routing for the IBM Rhapsody SE apps
+  namespace: {{ .Values.global.namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  ## Accept IBM Rhapsody SE license by setting the value as true.
+  acceptLicense: {{ .Values.acceptLicense }}
+
+  ## Licensing configuration
+  licensing:
+   #lingerTimeDefault: 1800
+   #licensesExpirySecs: 4
+    server:
+      host: license_server
+      id: 0242ac1100021
+      port: 27000
+    vendor:
+      id: ibmratl
+      port: 27002
+      
+  ##(Optional)Version of IBM Rhapsody SE that need to be deployed.
+  ## If omitted the latest version supported will be installed
+  #version: <>
+  
+  ## Rhapsody SE image configuration
+  imagePullSecret: ibm-entitlement-key
+  imageRepo: {{ .Values.imageRepo }}
+  environment: {{ .Values.environment }}'
+
+  routing:
+    hostname: {{ .Values.routing.hostname }}
+    tlsSecret: selfsigned-cert-tls
+    internalServiceTlsSecret: tls-secret-rse-internal
+    #ingressClassName:
+    #annotations:
+
+ #logging:
+    #server: trace
+    #client: trace
+    #restApi: debug
+    #license: info
+
+  ## OIDC configuration
+  oidc:
+    clientId: {{ .Values.oidc.clientId }}
+    clientSecret: {{ .Values.oidc.clientSecret }}
+    signingKey: {{ .Values.oidc.signingKey }}
+    wellKnownEndpoint: {{ .Values.oidc.wellKnownEndpoint }}
+    introspectionEndpoint: {{ .Values.oidc.introspectionEndpoint }}
+
+  ## Database configuration
+  database:
+    server: http://sysml-primary.${NAMESPACE}.svc.cluster.local:5432
+    user: postgres
+    password: secret::sysml-pguser-postgres::password
+    adminUser: pgadmin
+    adminPassword: secret::sysml-pguser-pgadmin::password
+    # name: sysml
+    # schema: sysml
+    cacert: secret::sysml-cluster-cert::ca.crt
+    #dbConnOptions:
+      #connectTimeout: "100"
+      #socketTimeout: "0"
+      #tcpKeepAlive: "false"
+
+ #appEnvs:
+   #NODES: "0"
+   #app: rse
+
+## Link index provider
+  #linkIndexProvider:
+    #ldxEndpoint: ""
+    #isJASEnabled: false
+
+  ## List of server admin user names
+  serverAdminUsernames:
+{{- range .Values.serverAdminUsernames }}
+    - {{ . }}
+{{- end }}
+
+  ## Service token for adding OSLC associations
+  serviceToken: {{ .Values.serviceToken }}
+
+  ## Storage for template cache. By default ReadWriteMany as the access mode. Ensure you use a storage class that supports ReadWriteMany
+  storage:
+    storageClassName: {{ .Values.storageClassName }}
+    # capacity: 10Gi
