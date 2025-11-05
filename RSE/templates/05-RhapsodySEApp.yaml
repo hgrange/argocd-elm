@@ -86,5 +86,5 @@ spec:
 
   ## Storage for template cache. By default ReadWriteMany as the access mode. Ensure you use a storage class that supports ReadWriteMany
   storage:
-    storageClassName: {{ .Values.storageClassName }}'
+    storageClassName: {{ .Values.storageClassName }}
     # capacity: 10Gi
