@@ -53,7 +53,7 @@ spec:
 
   ## Database configuration
   database:
-    server: http://sysml-primary.${NAMESPACE}.svc.cluster.local:5432
+    server: http://sysml-primary.{{ .Values.global.namespace }}.svc.cluster.local:5432
     user: postgres
     password: secret::sysml-pguser-postgres::password
     adminUser: pgadmin
