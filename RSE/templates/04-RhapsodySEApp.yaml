@@ -21,7 +21,7 @@ metadata:
     clientSecret: {{ .Values.oidc.clientSecret }}
     signingKey: {{ .Values.oidc.signingKey }}
     wellKnownEndpoint: {{ Values.oidc.wellKnownEndpoint }}
-    introspectionEndpoint: {{ .Value.oidc.introspectionEndpoint }}
+    introspectionEndpoint: {{ .Values.oidc.introspectionEndpoint }}
 
   ## Database configuration
   database:
