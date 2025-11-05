@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: rse-create-secret
+  namespace: {{ .Values.global.namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "1" 
+spec:
+  template:
+    spec:
+      serviceAccountName: {{ .Values.oc.serviceaccount }}
+      serviceAccount: {{ .Values.oc.serviceaccount }}
+      containers:
+        - name: patchscc
+          image: {{ .Values.oc.image }}
+          command:
+            - /bin/sh
+            - -c
+            - |
+              oc patch scc anyuid --type='json' -p='[{"op": "add", "path": "/users/-", "value": "system:serviceaccount:{{ .Values.global.namespace }}:rhapsodyseapp-rse-deploy"}]}]'
+
+      restartPolicy: Never
