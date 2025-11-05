@@ -74,7 +74,7 @@ spec:
     #isJASEnabled: false
 
   ## List of server admin user names
-  serverAdminUsernames: |
+  serverAdminUsernames:
 {{- range .Values.serverAdminUsernames }}
     - {{ . }}
 {{- end }}
