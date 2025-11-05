@@ -7,19 +7,19 @@ postgres:
   image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi9-17.6-2534
 ibm:
   entitlement: eHh4eHh4eHh4eHh4eHh4Cg==
- oidc:
+oidc:
   clientId: sysmlv2-client
   clientSecret: oidc_client_secret
   signingKey: oidc_signingKey
   wellKnownEndpoint: https://keycloak-reporter.DOMAIN/realms/openliberty/.well-known/openid-configuration
   introspectionEndpoint: https://keycloak-reporter.DOMAIN/realms/openliberty/protocol/openid-connect/token/introspect
-  serverAdminUsernames:
-    - herve
-    - alice
-  serviceToken: serviceToken
-  storageClassName: sc
-  routing:
-    hostname: rse-rhapsody.apps.DOMAIN
-  environment: development
-  imageRepo: cp.icr.io/cp/ibm-rse
-  acceptLicense: false
+serverAdminUsernames:
+  - herve
+  - alice
+serviceToken: serviceToken
+storageClassName: sc
+routing:
+  hostname: rse-rhapsody.apps.DOMAIN
+environment: development
+imageRepo: cp.icr.io/cp/ibm-rse
+acceptLicense: false
