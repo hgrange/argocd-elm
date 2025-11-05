@@ -3,7 +3,7 @@ kind: RhapsodySEApp
 metadata:
   name: rhapsodyseapp  ## Defines the routing for the IBM Rhapsody SE apps
   routing:
-    hostname: rse-rhapsody.apps.ocp.82.66.156.8.nip.io
+    hostname: {{ .Vlues.routing.hostname }}
     tlsSecret: selfsigned-cert-tls
     internalServiceTlsSecret: tls-secret-rse-internal
     #ingressClassName:
@@ -49,24 +49,24 @@ metadata:
     #isJASEnabled: false
 
   ## List of server admin user names
-  serverAdminUsernames:
-    - herve
-    - sysml@myrsedomain.com
-    - sysml
+  serverAdminUsernames: |
+{{- range .Values.serverAdminUsernames }}
+    - {{ . }}
+{{- end }}
 
   ## Service token for adding OSLC associations
-  serviceToken: ktf5hjkioliholhZyhgftk
+  serviceToken: {{ .Values.serviceToken }}
 
   ## Storage for template cache. By default ReadWriteMany as the access mode. Ensure you use a storage class that supports ReadWriteMany
   storage:
-    storageClassName: nfs-client
+    storageClassName: {{ .Values.storageClassName }}'
     # capacity: 10Gi
 
 
   namespace: {{ .Values.global.namespace }}
 spec:
   ## Accept IBM Rhapsody SE license by setting the value as true.
-  acceptLicense: true
+  acceptLicense: {{ .Values.acceptLicense }}
 
   ## Licensing configuration
   licensing:
@@ -86,7 +86,7 @@ spec:
   
   ## Rhapsody SE image configuration
   imagePullSecret: ibm-entitlement-key
-  imageRepo: cp.icr.io/cp/ibm-rse
-  environment: development
+  imageRepo: {{ .Values.imageRepo }}
+  environment: {{ .Values.environment }}'
 
   
