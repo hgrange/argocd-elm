@@ -1,5 +1,6 @@
 global:
   namespace: rse
+  domain: DOMAIN
 oc:
   image: quay.io/openshift/origin-cli:latest
   serviceaccount: ibm-rse-createsecret
@@ -19,7 +20,7 @@ serverAdminUsernames:
 serviceToken: serviceToken
 storageClassName: sc
 routing:
-  hostname: rse-rhapsody.apps.DOMAIN
+  hostname: rse-rse.apps.DOMAIN
 environment: development
 imageRepo: cp.icr.io/cp/ibm-rse
 acceptLicense: false
