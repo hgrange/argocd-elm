@@ -3,7 +3,7 @@ kind: RhapsodySEApp
 metadata:
   name: rhapsodyseapp  ## Defines the routing for the IBM Rhapsody SE apps
   routing:
-    hostname: {{ .Vlues.routing.hostname }}
+    hostname: {{ .Values.routing.hostname }}
     tlsSecret: selfsigned-cert-tls
     internalServiceTlsSecret: tls-secret-rse-internal
     #ingressClassName:
