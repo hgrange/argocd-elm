@@ -45,9 +45,9 @@ spec:
 
   ## OIDC configuration
   oidc:
-    clientId: {{ .Values.oidc.clientId }}
-    clientSecret: {{ .Values.oidc.clientSecret }}
-    signingKey: {{ .Values.oidc.signingKey }}
+    clientId: secret::rse-application-secrets::oidcClientId
+    clientSecret: secret::rse-application-secrets::oidcClientSecret }}
+    signingKey: secret::rse-application-secrets::oidcSigningKey
     wellKnownEndpoint: {{ .Values.oidc.wellKnownEndpoint }}
     introspectionEndpoint: {{ .Values.oidc.introspectionEndpoint }}
 
