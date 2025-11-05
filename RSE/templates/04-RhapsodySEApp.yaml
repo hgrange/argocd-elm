@@ -1,7 +1,68 @@
 apiVersion: rhapsodyse.ibm.com/v1
 kind: RhapsodySEApp
 metadata:
-  name: rhapsodyseapp
+  name: rhapsodyseapp  ## Defines the routing for the IBM Rhapsody SE apps
+  routing:
+    hostname: rse-rhapsody.apps.ocp.82.66.156.8.nip.io
+    tlsSecret: selfsigned-cert-tls
+    internalServiceTlsSecret: tls-secret-rse-internal
+    #ingressClassName:
+    #annotations:
+
+ #logging:
+    #server: trace
+    #client: trace
+    #restApi: debug
+    #license: info
+
+  ## OIDC configuration
+  oidc:
+    clientId: {{ .Values.oidc.clientId }}
+    clientSecret: {{ .Values.oidc.clientSecret }}
+    signingKey: {{ .Values.oidc.signingKey }}
+    wellKnownEndpoint: {{ Values.oidc.wellKnownEndpoint }}
+    introspectionEndpoint: {{ .Value.oidc.introspectionEndpoint }}
+
+  ## Database configuration
+  database:
+    server: http://sysml-primary.${NAMESPACE}.svc.cluster.local:5432
+    user: postgres
+    password: secret::sysml-pguser-postgres::password
+    adminUser: pgadmin
+    adminPassword: secret::sysml-pguser-pgadmin::password
+    # name: sysml
+    # schema: sysml
+    cacert: secret::sysml-cluster-cert::ca.crt
+    #dbConnOptions:
+      #connectTimeout: "100"
+      #socketTimeout: "0"
+      #tcpKeepAlive: "false"
+
+ #appEnvs:
+   #NODES: "0"
+   #app: rse
+
+
+## Link index provider
+  #linkIndexProvider:
+    #ldxEndpoint: ""
+    #isJASEnabled: false
+
+  ## List of server admin user names
+  serverAdminUsernames:
+    - herve
+    - sysml@myrsedomain.com
+    - sysml
+
+  ## Service token for adding OSLC associations
+  serviceToken: ktf5hjkioliholhZyhgftk
+
+  ## Storage for template cache. By default ReadWriteMany as the access mode. Ensure you use a storage class that supports ReadWriteMany
+  storage:
+    storageClassName: nfs-client
+    # capacity: 10Gi
+
+
   namespace: {{ .Values.global.namespace }}
 spec:
   ## Accept IBM Rhapsody SE license by setting the value as true.
@@ -18,3 +79,14 @@ spec:
     vendor:
       id: ibmratl
       port: 27002
+      
+  ##(Optional)Version of IBM Rhapsody SE that need to be deployed.
+  ## If omitted the latest version supported will be installed
+  #version: <>
+  
+  ## Rhapsody SE image configuration
+  imagePullSecret: ibm-entitlement-key
+  imageRepo: cp.icr.io/cp/ibm-rse
+  environment: development
+
+  
