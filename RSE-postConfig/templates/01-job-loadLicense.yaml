@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: rse-load-license
+  namespace: {{ .Values.global.namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "1" 
+spec:
+  template:
+    spec:
+      serviceAccountName: {{ .Values.oc.serviceaccount }}
+      serviceAccount: {{ .Values.oc.serviceaccount }}
+      containers:
+        - name: defsecret
+          image: {{ .Values.oc.image }}
+          command:
+            - /bin/sh
+            - -c
+            - |
+              DBPASSWORD=$(oc get secret sysml-pguser-postgres -n {{ .Values.global.namespace }} -o jsonpath='{.data.password}' )
+              JOB_UID=$(oc get job rse-create-secret -n {{ .Values.global.namespace }} -o jsonpath='{.metadata.uid}')
+              
+              cat << EOF | oc apply -f -
+              kind: Secret
+              apiVersion: v1
+              metadata:
+                name: rse-application-secrets
+                namespace: {{ .Values.global.namespace }}              
+                ownerReferences:
+                - apiVersion: batch/v1
+                  kind: Job
+                  name: rse-create-secret
+                  uid: $JOB_UID
+              data:
+                dbPassword: $DBPASSWORD
+                dbAdminPassword: $DBPASSWORD
+                oidcClientId: {{ .Values.oidc.clientId | b64enc }}
+                oidcClientSecret: {{ .Values.oidc.clientSecret | b64enc }}
+                oidcSigningKey: {{ .Values.oidc.signingKey | b64enc }}
+              EOF
+      restartPolicy: Never
