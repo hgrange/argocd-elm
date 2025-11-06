@@ -7,3 +7,5 @@ license:
   secret: rse-license-token
 auth:
   token: XXXXXXXXXXXXXXXX
+api:
+  url: http://localhost/_rest/api/trial-tokens
