@@ -32,16 +32,21 @@ spec:
           command:
             - /bin/sh
             - -c
-            - |
-              
-              curl -i  -k -X POST {{ .Values.api.url }}  \
+            - |           
+              STATUS=$(curl  -s -o /dev/null -k -X POST {{ .Values.api.url }}  \
                   -H "Content-Type: application/json" \
                   -H 'Accept: application/json' \
                   -H "Authorization: $(cat /tmp/tokenauth )" \
-                  --data "{\"token\": \"$( cat /tmp/tokenli )\" }"
-             result=$?
-             echo $result
-             exit $result
+                  --data "{\"token\": \"$( cat /tmp/tokenli )\" }" )
+            
+              if [ "$STATUS" -eq 200 ]; then
+                 echo "Success"
+                 exit 0
+              else
+                 echo "Failed with status $STATUS"
+              exit 1
+          fi
+
 
               
       restartPolicy: Never
