@@ -31,6 +31,7 @@ spec:
             readOnly: true
           command:
             - /bin/sh
+            - -xv
             - -c
             - |           
               STATUS=$(curl  -s -o /dev/null -k -X POST {{ .Values.api.url }}  \
