@@ -1,7 +1,8 @@
 global:
   namespace: rse
 oc:
-  serviceaccount: toto
+  serviceaccount: ibm-rse-createsecret
+  image: quay.io/openshift/origin-cli:latest
 license:
   secret: rse-license-token
 auth:
