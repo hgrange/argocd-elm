@@ -10,20 +10,29 @@ spec:
     spec:
       serviceAccountName: {{ .Values.oc.serviceaccount }}
       serviceAccount: {{ .Values.oc.serviceaccount }}
+      volumes:
+      - name: token
+        secret:
+          secretName: {{ .Values.license.secret }}
       containers:
         - name: loadlicense
           image: {{ .Values.oc.image }}
+          volumeMounts:
+          - name: token
+            mountPath: /tmp/token
+            subPath: token
+            readOnly: true
+          readOnly: true
           command:
             - /bin/sh
             - -c
             - |
-              DBPASSWORD=$(oc get secret sysml-pguser-postgres -n {{ .Values.global.namespace }} -o jsonpath='{.data.password}' )
-              lb64=$(oc get secret rse-create-secret -n {{ .Values.global.namespace }} -o jsonpath='{.data.token}')
+              
               curl -i  -k -X POST {{ .Values.api.url }}  \
                   -H "Content-Type: application/json" \
                   -H 'Accept: application/json' \
                   -H "Authorization: {{ .Values.auth.token }} " \
-                  --data '{"token": "{{ $lb64 | b64dec "}'
+                  --data "{\"token\": \"$( cat /tmp/token )\" }"
 
               
       restartPolicy: Never
