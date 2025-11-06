@@ -39,6 +39,9 @@ spec:
                   -H 'Accept: application/json' \
                   -H "Authorization: $(cat /tmp/tokenauth )" \
                   --data "{\"token\": \"$( cat /tmp/tokenli )\" }"
+             result=$?
+             echo $result
+             exit $result
 
               
       restartPolicy: Never
