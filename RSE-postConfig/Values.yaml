@@ -1,5 +1,7 @@
 global:
   namespace: rse
+oc:
+  serviceaccount: toto
 license:
   secret: rse-license-token
 auth:
