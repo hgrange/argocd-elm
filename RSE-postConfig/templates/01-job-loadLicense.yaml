@@ -37,7 +37,7 @@ spec:
               curl -i  -k -X POST {{ .Values.api.url }}  \
                   -H "Content-Type: application/json" \
                   -H 'Accept: application/json' \
-                  -H "Authorization: $(cat /tmp/tokanauth )" \
+                  -H "Authorization: $(cat /tmp/tokenauth )" \
                   --data "{\"token\": \"$( cat /tmp/tokenli )\" }"
 
               
