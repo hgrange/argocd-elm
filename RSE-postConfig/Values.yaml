@@ -1,2 +1,6 @@
-secret: rse-license-token
-token: XXXXXXXXXXXXXXXX
+global:
+  namespace: rse
+license:
+  secret: rse-license-token
+auth:
+  token: XXXXXXXXXXXXXXXX
