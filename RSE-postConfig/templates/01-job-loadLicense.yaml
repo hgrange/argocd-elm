@@ -11,18 +11,24 @@ spec:
       serviceAccountName: {{ .Values.oc.serviceaccount }}
       serviceAccount: {{ .Values.oc.serviceaccount }}
       volumes:
-      - name: token
+      - name: tokenli
         secret:
           secretName: {{ .Values.license.secret }}
+      - name: tokenauth
+        secret:
+          secretName: {{ .Values.auth.secret }}
       containers:
         - name: loadlicense
           image: {{ .Values.oc.image }}
           volumeMounts:
-          - name: token
-            mountPath: /tmp/token
+          - name: tokenli
+            mountPath: /tmp/tokenli
             subPath: token
             readOnly: true
-          readOnly: true
+          - name: tokenauth
+            mountPath: /tmp/tokenauth
+            subPath: token
+            readOnly: true
           command:
             - /bin/sh
             - -c
@@ -31,8 +37,8 @@ spec:
               curl -i  -k -X POST {{ .Values.api.url }}  \
                   -H "Content-Type: application/json" \
                   -H 'Accept: application/json' \
-                  -H "Authorization: {{ .Values.auth.token }} " \
-                  --data "{\"token\": \"$( cat /tmp/token )\" }"
+                  -H "Authorization: $(cat /tmp/tokanauth )" \
+                  --data "{\"token\": \"$( cat /tmp/tokenli )\" }"
 
               
       restartPolicy: Never
