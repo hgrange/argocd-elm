@@ -4,7 +4,7 @@ metadata:
   name: rhapsodyseapp  ## Defines the routing for the IBM Rhapsody SE apps
   namespace: {{ .Values.global.namespace }}
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   ## Accept IBM Rhapsody SE license by setting the value as true.
   acceptLicense: {{ .Values.acceptLicense }}
