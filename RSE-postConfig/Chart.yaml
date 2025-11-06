@@ -1,0 +1,4 @@
+apiVersion: v2
+name: ibm-rse-postconfig
+description: A Helm chart for post configuration IBM Rhapsody
+version: 0.1.0
