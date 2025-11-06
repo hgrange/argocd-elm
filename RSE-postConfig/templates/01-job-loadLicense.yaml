@@ -44,9 +44,6 @@ spec:
                  exit 0
               else
                  echo "Failed with status $STATUS"
-              exit 1
-          fi
-
-
-              
+                 exit 1
+              fi
       restartPolicy: Never
