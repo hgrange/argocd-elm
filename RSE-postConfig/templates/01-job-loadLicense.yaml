@@ -34,11 +34,14 @@ spec:
             - -xv
             - -c
             - |           
-              STATUS=$(curl  -s -o /dev/null -k -X POST {{ .Values.api.url }}  \
+              curl  -v -k -X POST {{ .Values.api.url }}  \
                   -H "Content-Type: application/json" \
                   -H 'Accept: application/json' \
                   -H "Authorization: $(cat /tmp/tokenauth )" \
-                  --data "{\"token\": \"$( cat /tmp/tokenli )\" }" )
+                  --data "{\"token\": \"$( cat /tmp/tokenli )\" }"  > /tmp/curl.out
+              STATUS= $( cat /tmp/curl.out |grep http )
+              sleep 9999999
+              
             
               if [ "$STATUS" -eq 200 ]; then
                  echo "Success"
