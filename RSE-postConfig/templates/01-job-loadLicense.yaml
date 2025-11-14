@@ -39,7 +39,7 @@ spec:
                   -H 'Accept: application/json' \
                   -H "Authorization: $(cat /tmp/tokenauth )" \
                   --data "{\"token\": \"$( cat /tmp/tokenli )\" }"  > /tmp/curl.out
-               STATUS= $( cat curl.out | tr ',' '\12' | tr '}' '\12' | grep code | awk -F: '{ print $2 }' )
+               STATUS=$( cat curl.out | tr ',' '\12' | tr '}' '\12' | grep code | awk -F: '{ print $2 }' )
                cat /tmp/curl.out
               
             
